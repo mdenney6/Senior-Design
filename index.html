@@ -5,8 +5,9 @@
   <meta charset=utf-8 />
   <title>Store Locator</title>
   <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet'>
-  <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
-  <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet' />
+  <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
+  <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
   <style>
   body {
     color:#404040;
@@ -127,10 +128,10 @@
     font-weight:700;
     margin-top:-15px;
   }
-  .leaflet-popup-content div {
+  .custom-popup .leaflet-popup-content div {
     padding:10px;
   }
-  .leaflet-container .leaflet-marker-icon { 
+  .custom-popup .leaflet-container .leaflet-marker-icon { 
     cursor:pointer; 
   }
   </style>
@@ -144,237 +145,53 @@
   </div>
   <div id='map' class='map'> </div>
   <script>
+
   L.mapbox.accessToken = 'pk.eyJ1IjoibWRlbm5leTYiLCJhIjoiTWZGNms2NCJ9.uvutCqQ3q7k1iX-5ShZp_Q';
-  var geojson = [
-  
-      {
-        "type": "FeatureCollection",
-        "features": [
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "Point",
-              "coordinates": [
-                -77.049766,
-                38.900772
-              ]
-            },
-            "properties": {
-              "phoneFormatted": "(202) 507-8357",
-              "phone": "2025078357",
-              "address": "2221 I St NW",
-              "city": "Washington DC",
-              "country": "United States",
-              "crossStreet": "at 22nd St NW",
-              "postalCode": "20037",
-              "state": "D.C."
-            }
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "Point",
-              "coordinates": [
-                -77.043929,
-                38.910525
-              ]
-            },
-            "properties": {
-              "phoneFormatted": "(202) 387-9338",
-              "phone": "2023879338",
-              "address": "1512 Connecticut Ave NW",
-              "city": "Washington DC",
-              "country": "United States",
-              "crossStreet": "at Dupont Circle",
-              "postalCode": "20036",
-              "state": "D.C."
-            }
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "Point",
-              "coordinates": [
-                -77.0672,
-                38.90516896
-              ]
-            },
-            "properties": {
-              "phoneFormatted": "(202) 337-9338",
-              "phone": "2023379338",
-              "address": "3333 M St NW",
-              "city": "Washington DC",
-              "country": "United States",
-              "crossStreet": "at 34th St NW",
-              "postalCode": "20007",
-              "state": "D.C."
-            }
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "Point",
-              "coordinates": [
-                -77.002583742142,
-                38.887041080933
-              ]
-            },
-            "properties": {
-              "phoneFormatted": "(202) 547-9338",
-              "phone": "2025479338",
-              "address": "221 Pennsylvania Ave SE",
-              "city": "Washington DC",
-              "country": "United States",
-              "crossStreet": "btwn 2nd & 3rd Sts. SE",
-              "postalCode": "20003",
-              "state": "D.C."
-            }
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "Point",
-              "coordinates": [
-                -76.933492720127,
-                38.99225245786
-              ]
-            },
-            "properties": {
-              "address": "8204 Baltimore Ave",
-              "city": "College Park",
-              "country": "United States",
-              "postalCode": "20740",
-              "state": "MD"
-            }
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "Point",
-              "coordinates": [
-                -77.097083330154,
-                38.980979
-              ]
-            },
-            "properties": {
-              "phoneFormatted": "(301) 654-7336",
-              "phone": "3016547336",
-              "address": "4831 Bethesda Ave",
-              "cc": "US",
-              "city": "Bethesda",
-              "country": "United States",
-              "postalCode": "20814",
-              "state": "MD"
-            }
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "Point",
-              "coordinates": [
-                -77.359425054188,
-                38.958058116661
-              ]
-            },
-            "properties": {
-              "phoneFormatted": "(571) 203-0082",
-              "phone": "5712030082",
-              "address": "11935 Democracy Dr",
-              "city": "Reston",
-              "country": "United States",
-              "crossStreet": "btw Explorer & Library",
-              "postalCode": "20190",
-              "state": "VA"
-            }
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "Point",
-              "coordinates": [
-                -77.10853099823,
-                38.880100922392
-              ]
-            },
-            "properties": {
-              "phoneFormatted": "(703) 522-2016",
-              "phone": "7035222016",
-              "address": "4075 Wilson Blvd",
-              "city": "Arlington",
-              "country": "United States",
-              "crossStreet": "at N Randolph St.",
-              "postalCode": "22203",
-              "state": "VA"
-            }
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "Point",
-              "coordinates": [
-                -75.28784,
-                40.008008
-              ]
-            },
-            "properties": {
-              "phoneFormatted": "(610) 642-9400",
-              "phone": "6106429400",
-              "address": "68 Coulter Ave",
-              "city": "Ardmore",
-              "country": "United States",
-              "postalCode": "19003",
-              "state": "PA"
-            }
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "Point",
-              "coordinates": [
-                -75.20121216774,
-                39.954030175164
-              ]
-            },
-            "properties": {
-              "phoneFormatted": "(215) 386-1365",
-              "phone": "2153861365",
-              "address": "3925 Walnut St",
-              "city": "Philadelphia",
-              "country": "United States",
-              "postalCode": "19104",
-              "state": "PA"
-            }
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "Point",
-              "coordinates": [
-                -77.043959498405,
-                38.903883387232
-              ]
-            },
-            "properties": {
-              "phoneFormatted": "(202) 331-3355",
-              "phone": "2023313355",
-              "address": "1901 L St. NW",
-              "city": "Washington DC",
-              "country": "United States",
-              "crossStreet": "at 19th St",
-              "postalCode": "20036",
-              "state": "D.C."
-            }
-          }
-        ]
-      }
-  ];
-  var map = L.mapbox.map('map', 'examples.map-i80bb8p3')
+  var geojson = [{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-83.2697488,30.8573288]},
+      "properties": {
+        "city": "Valdosta",
+        "address": "1360 E Park Ave",
+        "name": "Valdosta Senior Center",
+        "phone": "2292595469",},},
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.422866,33.585723]},
+      "properties": {
+        "city": "Riverdale",
+        "address": "6213 Riverdale Rd",
+        "name": "Frank Bailey Senior Center",
+        "phone": "6784795505",},},
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-83.4445343,32.6483231]},
+      "properties": {
+        "city": "Moody Afb",
+        "address": "23 Wg/Ja 23 Flying Tiger Way",
+        "name": "Air Force Moody Air Force Base",
+        "phone": "2292573414",},},
+    
+  ]}];
+  var map = L.mapbox.map('map', 'mapbox.streets')
+      .setView([32, -83], 7)
       .addControl(L.mapbox.geocoderControl('mapbox.places', {
         keepOpen: true
     }));
 
+
   var listings = document.getElementById('listings');
   var locations = L.mapbox.featureLayer().addTo(map);
+
 
   locations.setGeoJSON(geojson);
 
@@ -395,7 +212,7 @@
     var prop = locale.feature.properties;
 
     // Each marker on the map.
-    var popup = '<h3>Sweetgreen</h3><div>' + prop.address;
+    var popup = '<h3>' + prop.name + '</h3><div>' + ' ' + prop.address;
 
     var listing = listings.appendChild(document.createElement('div'));
     listing.className = 'item';
@@ -404,16 +221,16 @@
     link.href = '#';
     link.className = 'title';
 
-    link.innerHTML = prop.address;
+    link.innerHTML = prop.name;
     if (prop.crossStreet) {
-      link.innerHTML += '<br /><small class="quiet">' + prop.crossStreet + '</small>';
-      popup += '<br /><small class="quiet">' + prop.crossStreet + '</small>';
+      link.innerHTML += '<br /><small class="quiet">' + prop.address + '</small>';
+      popup += '<br /><small class="quiet">' + prop.addresss + '</small>';
     }
 
     var details = listing.appendChild(document.createElement('div'));
     details.innerHTML = prop.city;
     if (prop.phone) {
-      details.innerHTML += ' &middot; ' + prop.phoneFormatted;
+      details.innerHTML += ' &middot; ' + prop.phone;
     }
 
     link.onclick = function() {
