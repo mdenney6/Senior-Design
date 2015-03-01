@@ -53,7 +53,8 @@
     top:0;bottom:0;
   }
   .heading {
-    background:#fff;
+    background:#6FB353;
+    color: white;
     border-bottom:1px solid #eee;
     height:60px;
     line-height:60px;
@@ -73,12 +74,12 @@
   .listings .item:last-child { border-bottom:none; }
   .listings .item .title {
     display:block;
-    color:#00853e;
+    color:black;
     font-weight:700;
   }
   .listings .item .title small { font-weight:400; }
   .listings .item.active .title,
-  .listings .item .title:hover { color:#8cc63f; }
+  .listings .item .title:hover { color:#FF9C2D; }
   .listings .item.active {
     background-color:#f8f8f8;
   }
@@ -93,7 +94,7 @@
     background:none;
   }
   ::-webkit-scrollbar-thumb {
-    background:#00853e;
+    background:#6FB353;
     border-radius:0;
   }
 
@@ -119,7 +120,7 @@
     padding:0;
   }
   .leaflet-popup-content h3 {
-    background:#91c949;
+    background:#FF9C2D;
     color:#fff;
     margin:0;
     display:block;
@@ -139,7 +140,7 @@
 <body>
   <div class='sidebar'>
     <div class='heading'>
-      <h1>Locations Near You</h1>
+      <h1>FREE TAX PREP LOCATIONS</h1>
     </div>
     <div id='listings' class='listings'></div>
   </div>
@@ -2597,11 +2598,13 @@
         "name": "UPR en Bayamon",
         "hours": "\"Fri 9:00AM to 3:00PM Closure: April 3, 2014 E-File: Yes Sat 9:00AM to 3:00PM Closure April 4, 2014 E-File: Yes\"",
         "languages": "English;Spanish",
-        "phone": "--",},},]}];  var map = L.mapbox.map('map', 'mapbox.streets')
-      .setView([32, -83], 7)
-      .addControl(L.mapbox.geocoderControl('mapbox.places', {
-        keepOpen: true
-    }));
+        "phone": "--",},},]}];  
+
+        var map = L.mapbox.map('map', 'mapbox.streets')
+          //changed values from 32 to 33 & 7 to 8. begins slightly more zoomed in.
+          .setView([33, -83], 8)
+          .addControl(L.mapbox.geocoderControl('mapbox.places', {keepOpen: true}));
+
 
 
   var listings = document.getElementById('listings');
@@ -2629,8 +2632,10 @@
     // Each marker on the map.
     var popup = '<h3>' + prop.name + '</h3><div>' + '\t' + prop.address + ' &middot; <a href="https://maps.google.com?daddr=' + prop.address.replace(' ', '+') + '+' + prop.city + '" target="_blank">Directions to Here</a>' + '</div>';
 
+    //lists each location on the sidebar
     var listing = listings.appendChild(document.createElement('div'));
     listing.className = 'item';
+
 
     var link = listing.appendChild(document.createElement('a'));
     link.href = '#';
@@ -2674,15 +2679,43 @@
       listing.scrollIntoView();
     });
 
+    //initialize map point for intial zoom level
     popup += '</div>';
     locale.bindPopup(popup);
 
     locale.setIcon(L.icon({
       iconUrl: 'marker.png',
-      iconSize: [56, 56],
-      iconAnchor: [28, 28],
-      popupAnchor: [0, -34]
+      iconSize: [5, 5],
+      iconAnchor: [10, 10],
+      popupAnchor: [0, -15]
     }));
+
+    //enlarge or reduce map point based on zoom level
+    map.on('zoomend', function(){
+      console.log("current zoom: " + map.getZoom());
+      if(map.getZoom() <= 9){
+        locale.setIcon(L.icon({
+          iconUrl: 'marker.png',
+          iconSize: [5, 5],
+          iconAnchor: [10, 10],
+          popupAnchor: [0, -15]
+        }));
+      } else if(map.getZoom() > 9 && map.getZoom() <= 12){
+        locale.setIcon(L.icon({
+          iconUrl: 'marker.png',
+          iconSize: [8, 8],
+          iconAnchor: [10, 10],
+          popupAnchor: [0, -10]
+        }));
+      } else{
+        locale.setIcon(L.icon({
+          iconUrl: 'marker.png',
+          iconSize: [20, 20],
+          iconAnchor: [10, 10],
+          popupAnchor: [0, -10]
+        }));    
+      }
+  });
 
 });
 </script>
