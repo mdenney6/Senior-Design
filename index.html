@@ -2613,6 +2613,7 @@
 
   locations.setGeoJSON(geojson);
 
+  //sets each listing to be active so when clicking on location in sidebar it makes map move
   function setActive(el) {
     var siblings = listings.getElementsByTagName('div');
     for (var i = 0; i < siblings.length; i++) {
@@ -2685,7 +2686,7 @@
 
     locale.setIcon(L.icon({
       iconUrl: 'marker.png',
-      iconSize: [5, 5],
+      iconSize: [20, 20],
       iconAnchor: [10, 10],
       popupAnchor: [0, -15]
     }));
@@ -2696,21 +2697,21 @@
       if(map.getZoom() <= 9){
         locale.setIcon(L.icon({
           iconUrl: 'marker.png',
-          iconSize: [5, 5],
+          iconSize: [25, 25],
           iconAnchor: [10, 10],
           popupAnchor: [0, -15]
         }));
       } else if(map.getZoom() > 9 && map.getZoom() <= 12){
         locale.setIcon(L.icon({
           iconUrl: 'marker.png',
-          iconSize: [8, 8],
+          iconSize: [30, 30],
           iconAnchor: [10, 10],
           popupAnchor: [0, -10]
         }));
       } else{
         locale.setIcon(L.icon({
           iconUrl: 'marker.png',
-          iconSize: [20, 20],
+          iconSize: [35, 35],
           iconAnchor: [10, 10],
           popupAnchor: [0, -10]
         }));    
