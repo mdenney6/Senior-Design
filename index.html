@@ -3205,7 +3205,14 @@
         "additionalInfo": "",
         "programType": "VITA",},},]}];
 
-        var map = L.mapbox.map('map', 'mapbox.streets')
+        var southWest = L.latLng(30.539186, -85.396771),
+            northEast = L.latLng(35.394075, -81.353803),
+            bounds = L.latLngBounds(southWest, northEast);
+
+        var map = L.mapbox.map('map', 'mapbox.streets', {
+          maxBounds: bounds,
+          minZoom: 7
+        })
           //changed values from 32 to 33 & 7 to 8. begins slightly more zoomed in.
           .setView([33, -83], 8)
           .addControl(L.mapbox.geocoderControl('mapbox.places', {keepOpen: true}));
