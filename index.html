@@ -3236,7 +3236,7 @@
     var prop = locale.feature.properties;
 
     // Each marker on the map.
-    var popup = '<h3>' + prop.name + '</h3><div>' + '\t' + prop.addressLine1 + ' &middot; <a href="https://maps.google.com?daddr=' + prop.addressLine1.replace(' ', '+') + '+' + prop.city + '" target="_blank">Directions to Here</a>' + '</div>';
+    var popup = '<h3>' + prop.name + " - " + prop.programType + '</h3><div>' + '\t' + prop.addressLine1 + ' &middot; <a href="https://maps.google.com?daddr=' + prop.addressLine1.replace(' ', '+') + '+' + prop.city + '" target="_blank">Directions to Here</a>' + '</div>';
 
     //lists each location on the sidebar
     var listing = listings.appendChild(document.createElement('div'));
@@ -3248,20 +3248,29 @@
     link.href = '#';
     link.className = 'title';
 
-    link.innerHTML = prop.name;
+    link.innerHTML = prop.name + " - " + prop.programType;
     if (prop.crossStreet) {
       link.innerHTML += '<br /><small class="quiet">' + prop.addressLine1 + '</small>';
       popup += '<br /><small class="quiet">' + prop.addresssLine1 + '</small>';
     }
 
     var details = listing.appendChild(document.createElement('div'));
-    details.innerHTML = prop.city;
+    
     if (prop.phone && prop.phone != "--") {
-      details.innerHTML += ' &middot; ' + prop.phone;
+      details.innerHTML += prop.phone;
+      details.innerHTML += ' &middot; ' + prop.languages + '<br>';
     }
-    details.innerHTML += ' &middot; ' + prop.languages;
+
+    details.innerHTML += prop.addressLine1;
+    if (prop.addressLine2) {
+      details.innerHTML += '<br>' + prop.addressLine2;
+    }
+    details.innerHTML += '<br>' + prop.city + ", GA";
     if (prop.hours) {
-      details.innerHTML += ' &middot; ' + prop.hours;
+      details.innerHTML += '<br>' + prop.hours;
+    }
+    if (prop.additionalInfo) {
+      details.innerHTML += '<br>' + prop.additionalInfo;
     }
 
     link.onclick = function() {
