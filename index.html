@@ -144,6 +144,12 @@
   .custom-popup .leaflet-container .leaflet-marker-icon { 
     cursor:pointer; 
   }
+  .alignright {
+    float: right;
+  }
+  .alignleft {
+    float:left;
+  }
   </style>
 </head>
 <body>
@@ -3261,22 +3267,21 @@
 
     var details = listing.appendChild(document.createElement('div'));
     
+
+    var address2 = prop.addressLine2 ? prop.addressLine2 + '<br>': prop.addressLine2;
+
+    details.innerHTML += '<p class="alignleft">' + prop.addressLine1 + '<br>' + address2 + prop.city + ", GA" + '</p>';
+
     if (prop.phone && prop.phone != "--") {
-      details.innerHTML += prop.phone;
-      details.innerHTML += ' &middot; ' + prop.languages + '<br>';
+      details.innerHTML += '<p class="alignright">' + prop.phone + ' &middot; ' + prop.languages + '</p>';/* + prop.hours + '</p>';*/
     }
 
-    details.innerHTML += prop.addressLine1;
-    if (prop.addressLine2) {
-      details.innerHTML += '<br>' + prop.addressLine2;
-    }
-    details.innerHTML += '<br>' + prop.city + ", GA";
-    if (prop.hours) {
-      details.innerHTML += '<br>' + prop.hours;
-    }
-    if (prop.additionalInfo) {
-      details.innerHTML += '<br>' + prop.additionalInfo;
-    }
+    /*if(prop.hours)
+      details.innerHTML += '<p class="alignleft">' + prop.hours + '</p>';*/
+    details.innerHTML += '<p class="alignleft">' + prop.hours + '<br>' + prop.additionalInfo + '</p>';
+    //details.innerHTML += '<p class="alignleft">' + prop.hours + '</p>';
+
+    details.innerHTML += '<div style="clear: both;"></div>';
 
     link.onclick = function() {
       setActive(listing);
