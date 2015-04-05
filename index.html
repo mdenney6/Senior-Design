@@ -152,6 +152,7 @@
   }
   </style>
 </head>
+
 <body>
   <div class='heading'>
     <h1>FREE TAX PREP LOCATIONS</h1>
@@ -3259,6 +3260,7 @@
     link.href = '#';
     link.className = 'title';
 
+	//Format of sidebar
     link.innerHTML = prop.name + " - " + prop.programType;
     if (prop.crossStreet) {
       link.innerHTML += '<br /><small class="quiet">' + prop.addressLine1 + '</small>';
@@ -3267,18 +3269,20 @@
 
     var details = listing.appendChild(document.createElement('div'));
     
-
     var address2 = prop.addressLine2 ? prop.addressLine2 + '<br>': prop.addressLine2;
 
     details.innerHTML += '<p class="alignleft">' + prop.addressLine1 + '<br>' + address2 + prop.city + ", GA" + '</p>';
 
     if (prop.phone && prop.phone != "--") {
-      details.innerHTML += '<p class="alignright">' + prop.phone + ' &middot; ' + prop.languages + '</p>';/* + prop.hours + '</p>';*/
+      details.innerHTML += '<p class="alignright">' + prop.phone + ' &middot; ' + prop.languages + '<br>' + prop.hours + '</p>';
     }
 
     /*if(prop.hours)
       details.innerHTML += '<p class="alignleft">' + prop.hours + '</p>';*/
-    details.innerHTML += '<p class="alignleft">' + prop.hours + '<br>' + prop.additionalInfo + '</p>';
+    //details.innerHTML += '<p class="alignright">' + prop.hours + '<br>' + prop.additionalInfo + '</p>';
+    if(prop.additionalInfo) {
+    	details.innerHTML += '<p class="alignleft">' + '<br>' + prop.additionalInfo + '</p>';
+    }
     //details.innerHTML += '<p class="alignleft">' + prop.hours + '</p>';
 
     details.innerHTML += '<div style="clear: both;"></div>';
