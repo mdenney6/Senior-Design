@@ -44,7 +44,7 @@
     border-right:1px solid rgba(0,0,0,0.25);
 
     /*new value - CF*/
-    top: 10%;
+    top: 13%;
   }
   .pad2 {
     padding:20px;
@@ -150,12 +150,23 @@
   .alignleft {
     float:left;
   }
+  .search-ui {
+	width:33%;
+	padding:10px;
+  }
+  .search-ui input {
+	width:100%;
+	font-size:19px;
+  }
   </style>
 </head>
 
 <body>
   <div class='heading'>
     <h1>FREE TAX PREP LOCATIONS</h1>
+  </div>
+  <div class='search-ui'>
+	<input id='filter' type='textfield' placeholder='Filter Locations'/>
   </div>
   <div class='sidebar'>
     <div id='listings' class='listings'></div>
@@ -3213,6 +3224,7 @@
         "additionalInfo": "",
         "programType": "VITA",},},]}];
 
+		//TODO: Move the west boundary further west to accomodate top-left corner of Georgia
         var southWest = L.latLng(30.539186, -85.396771),
             northEast = L.latLng(35.394075, -81.353803),
             bounds = L.latLngBounds(southWest, northEast);
@@ -3348,8 +3360,50 @@
         }));    
       }
   });
-
 });
+	$('#filter').keyup(filter);
+	
+	function filter() {
+		// get the value of the filter input field
+		var filterString = $('#filter').val().toLowerCase();
+
+		//THIS DID NOT WORK:
+		//SetFilter deletes/recreates each marker, so we lose all the on-clicks
+		//and icons that were set in the "eachLayer" function above
+		
+		/*locations.setFilter(showName);
+
+		// here we're simply comparing the 'state' property of each marker
+		// to the filter string, seeing whether the former contains the latter.
+		function showName(feature) {
+			return feature.properties.name
+				.toLowerCase()
+				.indexOf(filterString) !== -1;
+		}*/
+		
+		//SetFilter workaround
+		locations.eachLayer(function(locale) {
+			if (locale.feature.properties.name
+				.toLowerCase()
+				.indexOf(filterString) !== -1) {
+				//Show the marker
+				$(locale._icon).css("display","");
+			} else {
+				//Hide the marker
+				$(locale._icon).css("display","none");
+			}
+		});
+		
+		//A little hacky, should be doing "each" on .item and checking
+		//the title inside the loop
+		$("#listings .title").each(function(i,v) {
+			if ($(v).text().toLowerCase().indexOf(filterString) !== -1) {
+				$(v).parent().css("display","block");
+			} else {
+				$(v).parent().css("display","none");
+			}
+		});
+	}
 </script>
 </body>
 </html>
