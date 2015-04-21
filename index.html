@@ -44,7 +44,7 @@
     border-right:1px solid rgba(0,0,0,0.25);
 
     /*new value - CF*/
-    top: 13%;
+    top: 10%;
   }
   .pad2 {
     padding:20px;
@@ -166,7 +166,7 @@
     <h1>FREE TAX PREP LOCATIONS</h1>
   </div>
   <div class='search-ui'>
-	<input id='filter' type='textfield' placeholder='Filter Locations'/>
+	<!--<input id='filter' type='textfield' placeholder='Filter Locations'/>-->
   </div>
   <div class='sidebar'>
     <div id='listings' class='listings'></div>
@@ -3427,8 +3427,8 @@
         "programType": "VITA",},},]}];
 
 		//TODO: Move the west boundary further west to accomodate top-left corner of Georgia
-        var southWest = L.latLng(30.539186, -85.396771),
-            northEast = L.latLng(35.394075, -81.353803),
+        var southWest = L.latLng(29.539186, -86.396771),
+            northEast = L.latLng(36.394075, -80.353803),
             bounds = L.latLngBounds(southWest, northEast);
 
         var map = L.mapbox.map('map', 'mapbox.streets', {
@@ -3462,7 +3462,7 @@
     var prop = locale.feature.properties;
 
     // Each marker on the map.
-    var popup = '<h3>' + prop.name + " - " + prop.programType + '</h3><div>' + '\t' + prop.addressLine1 + ' &middot; <a href="https://maps.google.com?daddr=' + prop.addressLine1.replace(' ', '+') + '+' + prop.city + '" target="_blank">Directions</a>' + '</div>';
+    var popup = '<h3>' + prop.name + " - " + prop.programType + '</h3><div>' + '\t' + '<a href="https://maps.google.com?daddr=' + prop.addressLine1.replace(' ', '+') + '+' + prop.city + '" target="_blank">Directions To: </a> <br> ' + prop.addressLine1 + '<br>' + prop.addressLine2 + '</div>';
 
     //lists each location on the sidebar
     var listing = listings.appendChild(document.createElement('div'));
@@ -3563,7 +3563,7 @@
       }
   });
 });
-	$('#filter').keyup(filter);
+	/*$('#filter').keyup(filter);
 	
 	function filter() {
 		// get the value of the filter input field
@@ -3573,7 +3573,7 @@
 		//SetFilter deletes/recreates each marker, so we lose all the on-clicks
 		//and icons that were set in the "eachLayer" function above
 		
-		/*locations.setFilter(showName);
+		locations.setFilter(showName);
 
 		// here we're simply comparing the 'state' property of each marker
 		// to the filter string, seeing whether the former contains the latter.
@@ -3581,7 +3581,7 @@
 			return feature.properties.name
 				.toLowerCase()
 				.indexOf(filterString) !== -1;
-		}*/
+		}
 		
 		//SetFilter workaround
 		locations.eachLayer(function(locale) {
@@ -3605,7 +3605,7 @@
 				$(v).parent().css("display","none");
 			}
 		});
-	}
+	}*/
 </script>
 </body>
 </html>
