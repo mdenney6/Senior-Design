@@ -144,6 +144,10 @@
   .custom-popup .leaflet-container .leaflet-marker-icon { 
     cursor:pointer; 
   }
+
+  #subpopup{
+  	padding:10px;
+  }
   .alignright {
     float: right;
   }
@@ -3462,7 +3466,7 @@
     var prop = locale.feature.properties;
 
     // Each marker on the map.
-    var popup = '<h3>' + prop.name + " - " + prop.programType + '</h3><div>' + '\t' + '<a href="https://maps.google.com?daddr=' + prop.addressLine1.replace(' ', '+') + '+' + prop.city + '" target="_blank">Directions To: </a> <br> ' + prop.addressLine1 + '<br>' + prop.addressLine2 + '</div>';
+    var popup = '<h3>' + prop.name + " - " + prop.programType + '</h3><div><div id = "subpopup">' + '\t' + '<a href="https://maps.google.com?daddr=' + prop.addressLine1.replace(' ', '+') + '+' + prop.city + '" target="_blank">Directions To: </a> <br> ' + prop.addressLine1 + '<br>' + prop.addressLine2 + '</div></div>';
 
     //lists each location on the sidebar
     var listing = listings.appendChild(document.createElement('div'));
@@ -3491,12 +3495,12 @@
       details.innerHTML += '<p class="alignright">' + prop.phone + ' &middot; ' + prop.languages + '<br>' + prop.hours1 + '<br>' + prop.hours2 + '</p>';
     }
 
-    /*if(prop.hours)
-      details.innerHTML += '<p class="alignleft">' + prop.hours + '</p>';*/
-    //details.innerHTML += '<p class="alignright">' + prop.hours + '<br>' + prop.additionalInfo + '</p>';
-    if(prop.additionalInfo) {
-    	details.innerHTML += '<p class="alignleft">' + '<br>' + prop.additionalInfo + '</p>';
-    }
+
+    //If you want to add the additional info for each site, uncomment the following 4 lines: 
+
+    // if(prop.additionalInfo) {
+    // 	details.innerHTML += '<p class="alignleft">' + '<br>' + prop.additionalInfo + '</p>';
+    // }
     //details.innerHTML += '<p class="alignleft">' + prop.hours + '</p>';
 
     details.innerHTML += '<div style="clear: both;"></div>';
@@ -3563,49 +3567,7 @@
       }
   });
 });
-	/*$('#filter').keyup(filter);
-	
-	function filter() {
-		// get the value of the filter input field
-		var filterString = $('#filter').val().toLowerCase();
 
-		//THIS DID NOT WORK:
-		//SetFilter deletes/recreates each marker, so we lose all the on-clicks
-		//and icons that were set in the "eachLayer" function above
-		
-		locations.setFilter(showName);
-
-		// here we're simply comparing the 'state' property of each marker
-		// to the filter string, seeing whether the former contains the latter.
-		function showName(feature) {
-			return feature.properties.name
-				.toLowerCase()
-				.indexOf(filterString) !== -1;
-		}
-		
-		//SetFilter workaround
-		locations.eachLayer(function(locale) {
-			if (locale.feature.properties.name
-				.toLowerCase()
-				.indexOf(filterString) !== -1) {
-				//Show the marker
-				$(locale._icon).css("display","");
-			} else {
-				//Hide the marker
-				$(locale._icon).css("display","none");
-			}
-		});
-		
-		//A little hacky, should be doing "each" on .item and checking
-		//the title inside the loop
-		$("#listings .title").each(function(i,v) {
-			if ($(v).text().toLowerCase().indexOf(filterString) !== -1) {
-				$(v).parent().css("display","block");
-			} else {
-				$(v).parent().css("display","none");
-			}
-		});
-	}*/
 </script>
 </body>
 </html>
