@@ -69,6 +69,14 @@
     width: 33.3333%;
   }
   
+  #textem{
+  	font-weight: bold;
+  }
+
+  #textemc{
+
+  }
+
   .listings {
     height:100%;
     overflow:auto;
@@ -83,8 +91,8 @@
   .listings .item:last-child { border-bottom:none; }
   .listings .item .title {
     display:block;
-    color:black;
-    font-weight:700;
+  	font-weight: bold;
+  	color:#6FB353;
   }
   .listings .item .title small { font-weight:400; }
   .listings .item.active .title,
@@ -162,6 +170,7 @@
 	width:100%;
 	font-size:19px;
   }
+
   </style>
 </head>
 
@@ -3430,7 +3439,6 @@
         "additionalInfo": "",
         "programType": "VITA",},},]}];
 
-		//TODO: Move the west boundary further west to accomodate top-left corner of Georgia
         var southWest = L.latLng(29.539186, -86.396771),
             northEast = L.latLng(36.394075, -80.353803),
             bounds = L.latLngBounds(southWest, northEast);
@@ -3465,14 +3473,13 @@
     // writing this long form over and over again.
     var prop = locale.feature.properties;
 
+
     // Each marker on the map.
-    var popup = '<h3>' + prop.name + " - " + prop.programType + '</h3><div><div id = "subpopup">' + '\t' + '<a href="https://maps.google.com?daddr=' + prop.addressLine1.replace(' ', '+') + '+' + prop.city + '" target="_blank">Directions To: </a> <br> ' + prop.addressLine1 + '<br>' + prop.addressLine2 + '</div></div>';
+    var popup = '<h3>' + prop.name + " - " + prop.programType + '</h3><div><div id = "subpopup">' + '\t' + '<a href="https://maps.google.com?daddr=' + prop.addressLine1.replace(' ', '+') + '+' + prop.city + '" target="_blank">Directions To: </a> <br> ' + prop.addressLine1 + '<br>' + prop.addressLine2 + prop.city + ", GA" + '</div></div>';
 
     //lists each location on the sidebar
     var listing = listings.appendChild(document.createElement('div'));
     listing.className = 'item';
-
-
 
     var link = listing.appendChild(document.createElement('a'));
     link.href = '#';
@@ -3487,14 +3494,10 @@
 
     var details = listing.appendChild(document.createElement('div'));
     
-    var address2 = prop.addressLine2 ? prop.addressLine2 + '<br>': prop.addressLine2;
 
-    details.innerHTML += '<p class="alignleft">' + prop.addressLine1 + '<br>' + address2 + prop.city + ", GA" + '</p>';
-
-    if (prop.phone && prop.phone != "--") {
-      details.innerHTML += '<p class="alignright">' + prop.phone + ' &middot; ' + prop.languages + '<br>' + prop.hours1 + '<br>' + prop.hours2 + '</p>';
-    }
-
+     if (prop.phone && prop.phone != "--") {
+      details.innerHTML += '<p>' + '<span id = "textem">City: </span>' + prop.city + '<br> <span id = "textem">Phone: </span>' + prop.phone + '<br> <span id = "textem">Language(s) spoken: </span>' + prop.languages + '<br>' + '<span id = "textem">Hours: </span>' + prop.hours1 + '<br>' + prop.hours2;
+    }   
 
     //If you want to add the additional info for each site, uncomment the following 4 lines: 
 
