@@ -3495,9 +3495,11 @@
     var details = listing.appendChild(document.createElement('div'));
     
 
-     if (prop.phone && prop.phone != "--") {
-      details.innerHTML += '<p>' + '<span id = "textem">City: </span>' + prop.city + '<br> <span id = "textem">Phone: </span>' + prop.phone + '<br> <span id = "textem">Language(s) spoken: </span>' + prop.languages + '<br>' + '<span id = "textem">Hours: </span>' + prop.hours1 + '<br>' + prop.hours2;
-    }   
+    if (prop.phone == "--") {
+        prop.phone = "";
+    }
+    
+    details.innerHTML += '<p>' + '<span id = "textem">City: </span>' + prop.city + '<br> <span id = "textem">Phone: </span>' + prop.phone + '<br> <span id = "textem">Language(s) spoken: </span>' + prop.languages + '<br>' + '<span id = "textem">Hours: </span>' + prop.hours1 + '<br>' + prop.hours2;  
 
     //If you want to add the additional info for each site, uncomment the following 4 lines: 
 
