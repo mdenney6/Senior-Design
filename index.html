@@ -3475,7 +3475,7 @@
 
 
     // Each marker on the map.
-    var popup = '<h3>' + prop.name + " - " + prop.programType + '</h3><div><div id = "subpopup">' + '\t' + '<a href="https://maps.google.com?daddr=' + prop.addressLine1.replace(' ', '+') + '+' + prop.city + '" target="_blank">Directions To: </a> <br> ' + prop.addressLine1 + '<br>' + prop.addressLine2 + prop.city + ", GA" + '</div></div>';
+    var popup = '<h3>' + prop.name + " - " + prop.programType + '</h3><div><div id = "subpopup">' + '\t' + '<a href="https://maps.google.com?daddr=' + prop.addressLine1.replace(' ', '+') + '+' + prop.city + '" target="_blank">Directions To: </a> <br> ' + prop.addressLine1 + '<br>' + prop.addressLine2 + ' ' + prop.city + ", GA" + '</div></div>';
 
     //lists each location on the sidebar
     var listing = listings.appendChild(document.createElement('div'));
